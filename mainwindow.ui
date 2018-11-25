@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>921</width>
+    <width>1427</width>
     <height>565</height>
    </rect>
   </property>
@@ -182,13 +182,61 @@
      </property>
     </column>
    </widget>
+   <widget class="QTableWidget" name="tableCuad">
+    <property name="geometry">
+     <rect>
+      <x>910</x>
+      <y>40</y>
+      <width>501</width>
+      <height>441</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>Count</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>COP</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>OP1</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>OP2</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>RES</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>920</x>
+      <y>10</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cuadruplos</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>921</width>
+     <width>1427</width>
      <height>23</height>
     </rect>
    </property>

@@ -412,7 +412,33 @@ void limpiarTabla(QTableWidget *tb){
 void MainWindow::imprimirTablas(){
 
     //imprimir cuadruplos
-//    cuadruplos
+    limpiarTabla(ui->tableCuad);
+    if(cuadruplos!=nullptr){
+        CuadruploPtr node = cuadruplos;
+        do{
+
+            ui->tableCuad->insertRow(ui->tableCuad->rowCount());
+            if(!traducir){
+                ui->tableCuad->setItem(ui->tableCuad->rowCount()-1,0,new QTableWidgetItem(QString::number(node->key)));
+                ui->tableCuad->setItem(ui->tableCuad->rowCount()-1,1,new QTableWidgetItem(QString::number(node->cop)));
+                ui->tableCuad->setItem(ui->tableCuad->rowCount()-1,2,new QTableWidgetItem(QString::number(node->op1)));
+                ui->tableCuad->setItem(ui->tableCuad->rowCount()-1,3,new QTableWidgetItem(QString::number(node->op2)));
+                ui->tableCuad->setItem(ui->tableCuad->rowCount()-1,4,new QTableWidgetItem(QString::number(node->resl)));
+            }else{
+                ui->tableCuad->setItem(ui->tableCuad->rowCount()-1,0,new QTableWidgetItem(QString::number(node->key)));
+                ui->tableCuad->setItem(ui->tableCuad->rowCount()-1,1,new QTableWidgetItem(QString::fromStdString(obtenerCOP(node->cop))));
+                ui->tableCuad->setItem(ui->tableCuad->rowCount()-1,2,new QTableWidgetItem(QString::fromStdString(obtenerValor(node->op1))));
+                ui->tableCuad->setItem(ui->tableCuad->rowCount()-1,3,new QTableWidgetItem(QString::fromStdString(obtenerValor(node->op2))));
+                ui->tableCuad->setItem(ui->tableCuad->rowCount()-1,4,new QTableWidgetItem(QString::fromStdString(obtenerValor(node->resl))));
+            }
+
+
+            node = node->next2;
+        }while(node!=nullptr);
+
+        ui->tableCuad->horizontalHeader()->setStretchLastSection(true);
+
+    }
 
 
     //imprimir tabla const
