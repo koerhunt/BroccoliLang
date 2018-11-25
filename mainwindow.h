@@ -20,6 +20,7 @@ public:
     void guardar();
     void guardarComo();
     void cerrar();
+    void analisisLexico();
 
 private:
     Ui::MainWindow *ui;

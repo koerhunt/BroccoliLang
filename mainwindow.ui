@@ -2,19 +2,28 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>921</width>
-    <height>555</height>
+    <height>621</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QTextBrowser" name="textEditor">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -43,6 +52,50 @@
      <string>Editor</string>
     </property>
    </widget>
+   <widget class="QTableWidget" name="tableLex">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>70</y>
+      <width>511</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <column>
+     <property name="text">
+      <string>Token</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Lexema</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Granema</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>40</y>
+      <width>121</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Analisis Lexico:</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -68,7 +121,7 @@
     <property name="title">
      <string>Verificaciones</string>
     </property>
-    <addaction name="actionVerificar_sintaxis"/>
+    <addaction name="aclexico"/>
     <addaction name="actionVerificar_sintaxis_2"/>
    </widget>
    <widget class="QMenu" name="menuconstruir">
@@ -143,7 +196,7 @@
     <string>Cerrar</string>
    </property>
   </action>
-  <action name="actionVerificar_sintaxis">
+  <action name="aclexico">
    <property name="text">
     <string>Lexica</string>
    </property>

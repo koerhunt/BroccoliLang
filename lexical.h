@@ -342,6 +342,10 @@ void loadFile(char *filepath){
     theFile.open (filepath, std::ios::in);
 }
 
+void loadStdFile(tipo_cadena filepath){
+    theFile.open (filepath, std::ios::in);
+}
+
 void closeFile(){
     theFile.close();
 }
@@ -430,6 +434,8 @@ lex_entry *dameToken(){
             break;
         }
     }
+
+    return nullptr;
 
 }
 

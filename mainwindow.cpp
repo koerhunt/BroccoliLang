@@ -9,7 +9,14 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QTextStream>
+
+#include "lexical.h"
+#include "shared_lex.h"
+
 using namespace std;
+
+//funciones
+void limpiarTabla(QTableWidget*);
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -23,6 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->mcerrar, &QAction::triggered, this, &MainWindow::cerrar);
     connect(ui->mguardarcomo, &QAction::triggered, this, &MainWindow::guardarComo);
 
+    //analisis
+    connect(ui->aclexico, &QAction::triggered, this, &MainWindow::analisisLexico);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -30,8 +41,54 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//solts
+//====== ANALISIS
 
+void MainWindow::analisisLexico(){
+
+    //guardar cambios
+    MainWindow::guardar();
+
+    //verificacion
+    if(working_file!=""){
+
+        //cargar archivo al lexico
+        loadStdFile(working_file.toStdString());
+
+        //inicializa Ltoken
+        Ltoken = 0;
+
+        //limpar
+        limpiarTabla(ui->tableLex);
+
+        while(Ltoken!=-1){
+            lex_entry *l = dameToken();
+
+            if(l!=nullptr){
+
+                ui->tableLex->insertRow(ui->tableLex->rowCount());
+
+                ui->tableLex->setItem(ui->tableLex->rowCount()-1,0,new QTableWidgetItem(QString::number(l->token)));
+                ui->tableLex->setItem(ui->tableLex->rowCount()-1,1,new QTableWidgetItem(QString::fromStdString(l->lexema)));
+                ui->tableLex->setItem(ui->tableLex->rowCount()-1,2,new QTableWidgetItem(QString::fromStdString(l->granema)));
+
+
+            }
+
+        }
+
+        ui->tableLex->horizontalHeader()->setStretchLastSection(true);
+
+        closeFile();
+
+    }
+
+}
+
+//====== FIN DE ANALISIS
+
+//====== OPERACIONES CON ARCHIVO Y EDITOR
+
+//cargar archivo al editor
 void MainWindow::abrir()
 {
 
@@ -65,6 +122,7 @@ void MainWindow::abrir()
 
 }
 
+//guardar archivo (save as)
 void MainWindow::guardarComo(){
 
     //pide al usuario un archivo
@@ -76,6 +134,7 @@ void MainWindow::guardarComo(){
 
 }
 
+//guardar archivo
 void MainWindow::guardar()
 {
 
@@ -121,4 +180,16 @@ void MainWindow::cerrar()
 {
     cout<<"cerrando"<<endl;
 }
+
+//====== FIN OPERACIONES CON ARCHIVO Y EDITOR
+
+//==== UTILERIA
+void limpiarTabla(QTableWidget *tb){
+    int i = tb->rowCount();
+    for(int j=0;j<=i;j++){
+        tb->removeRow(0);
+    }
+}
+
+
 
