@@ -17,7 +17,7 @@
 #define NOT 119
 
 //Vars
-static std::ifstream theFile;
+std::ifstream theFile;
 static tipo_cadena lexema;
 static char c;
 
@@ -347,7 +347,13 @@ void loadStdFile(tipo_cadena filepath){
 }
 
 void closeFile(){
-    theFile.close();
+    if(theFile.is_open()){
+        if(theFile.eof()){
+            theFile.get();
+            theFile.clear();
+            theFile.close();
+        }
+    }
 }
 
 

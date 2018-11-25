@@ -48,14 +48,22 @@ MainWindow::~MainWindow()
 
 void MainWindow::analisisSintactico(){
 
+    //verificacion
+    if(working_file==""){
+        MainWindow::abrir();
+    }
 
-    //guardar cambios
     MainWindow::guardar();
 
-    //verificacion
+    //doble verify
     if(working_file==""){
         return;
     }
+
+    //reinicializar ltoken
+    Ltoken=0;
+
+    closeFile();
 
     //cargar archivo al lexico
     loadStdFile(working_file.toStdString());
@@ -68,9 +76,6 @@ void MainWindow::analisisSintactico(){
     //prepara pila de ejecucion
     ExecucionStack.push('$'); //$ [fin de fichero]
     ExecucionStack.push(1);   //produccion program
-
-    //reinicializar ltoken
-    Ltoken=0;
 
     //while
     while(Ltoken!=-1){
@@ -85,9 +90,6 @@ void MainWindow::analisisSintactico(){
                 msgBox.setText("Analisis completado correctamente! la sintaxis es correcta");
                 msgBox.exec();
             }else{
-                while(!ExecucionStack.empty()){
-                    ExecucionStack.pop();
-                }
                 QMessageBox msgBox;
                 msgBox.setText("Analisis terminado incorrectamente, se llego al fin de fichero y no termino de analizar");
                 msgBox.exec();
@@ -169,7 +171,7 @@ void MainWindow::analisisSintactico(){
 
     }
 
-    closeFile();
+
 }
 
 void MainWindow::analisisLexico(){
