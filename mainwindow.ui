@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>921</width>
-    <height>621</height>
+    <height>565</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@
       <x>20</x>
       <y>40</y>
       <width>361</width>
-      <height>371</height>
+      <height>441</height>
      </rect>
     </property>
     <property name="readOnly">
@@ -59,9 +59,9 @@
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>70</y>
-      <width>511</width>
-      <height>121</height>
+      <y>40</y>
+      <width>501</width>
+      <height>131</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -87,7 +87,7 @@
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>40</y>
+      <y>10</y>
       <width>121</width>
       <height>23</height>
      </rect>
@@ -95,6 +95,92 @@
     <property name="text">
      <string>Analisis Lexico:</string>
     </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>340</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tabla de simbolos</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>190</y>
+      <width>161</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tabla de constantes</string>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tableCon">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>220</y>
+      <width>501</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>Addr</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Tipo</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Desc</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>RAM</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QTableWidget" name="tableVar">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>370</y>
+      <width>501</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>Addr</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Tipo</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Desc</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>RAM</string>
+     </property>
+    </column>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -128,7 +214,7 @@
     <property name="title">
      <string>Construir</string>
     </property>
-    <addaction name="actionCompilar_2"/>
+    <addaction name="accomp"/>
     <addaction name="separator"/>
     <addaction name="actionCargar_a_memoria"/>
     <addaction name="actionCargar"/>
@@ -206,7 +292,7 @@
     <string>Sintactica</string>
    </property>
   </action>
-  <action name="actionCompilar_2">
+  <action name="accomp">
    <property name="text">
     <string>Compilar</string>
    </property>

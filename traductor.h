@@ -343,6 +343,7 @@ cadena_tipo obtenerValor(int dir){
     }
 }
 
+
 //funciones de cuadruplos
 
 void generarCuadruplo(cops cop, int op1, int op2, int res)
@@ -977,5 +978,100 @@ void ACTION_2030(){
     rellenar(fin,CuadruplosCount);
 }
 
+
+void ejecutarAccion(int accion,int stkn, lex_entry *l){
+    switch (accion) {
+    case 2001:
+        ACTION_2001(l->lexema);
+        break;
+    case 2002:
+        ACTION_2002();
+        break;
+    case 2003:
+        ACTION_2003();
+        break;
+    case 2004:
+        ACTION_2004();
+        break;
+    case 2005:
+        ACTION_2005(stkn);
+        break;
+    case 2006:
+        ACTION_2006(stkn);
+        break;
+    case 2007:
+        ACTION_2007(stkn,l->lexema);
+        break;
+    case 2008:
+        ACTION_2008(stkn);
+        break;
+    case 2009:
+        ACTION_2009();
+        break;
+    case 2010:
+        ACTION_2010();
+        break;
+    case 2011:
+        ACTION_2011();
+        break;
+    case 2012:
+        ACTION_2012(stkn);
+        break;
+    case 2013:
+        ACTION_2013();
+        break;
+    case 2014:
+        ACTION_2014();
+        break;
+    case 2015:
+        ACTION_2015();
+        break;
+    case 2016:
+        ACTION_2016();
+        break;
+    case 2017:
+        ACTION_2017(stkn);
+        break;
+    case 2018:
+        ACTION_2018(l->lexema);
+        break;
+    case 2019:
+        ACTION_2019();
+        break;
+    case 2020:
+        ACTION_2020(l->lexema);
+        break;
+    case 2021:
+        ACTION_2021();
+        break;
+    case 2022:
+        ACTION_2022();
+        break;
+    case 2023:
+        ACTION_2023();
+        break;
+    case 2024:
+        ACTION_2024();
+        break;
+    case 2025:
+        ACTION_2025();
+        break;
+    case 2026:
+        ACTION_2026();
+        break;
+    case 2027:
+        ACTION_2027();
+        break;
+    case 2028:
+        ACTION_2028();
+        break;
+    case 2029:
+        ACTION_2029();
+        break;
+    case 2030:
+        ACTION_2030();
+        break;
+    }
+}
 
 #endif // TRADUCTOR_H

@@ -23,9 +23,13 @@ public:
     void analisisLexico();
 
     void analisisSintactico();
+    void compilar();
+    void imprimirTablas();
 private:
     Ui::MainWindow *ui;
     QString working_file;
+    QString output_file;
+    bool compile = false;
 };
 
 #endif // MAINWINDOW_H

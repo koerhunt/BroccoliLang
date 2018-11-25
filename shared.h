@@ -100,7 +100,6 @@ typedef ConstantesRow *ConstantesRowPtr;
 typedef struct tempRow TempRow;
 typedef TempRow *TempRowPtr;
 
-
 //raiz de la estructura
 static CuadruploPtr cuadruplos;
 

@@ -15,6 +15,8 @@
 
 #include "sintactical.h"
 
+#include "traductor.h"
+
 using namespace std;
 
 //funciones
@@ -36,6 +38,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->aclexico, &QAction::triggered, this, &MainWindow::analisisLexico);
     connect(ui->acsintx, &QAction::triggered, this, &MainWindow::analisisSintactico);
 
+    //compilar
+    connect(ui->accomp, &QAction::triggered, this, &MainWindow::compilar);
 
 }
 
@@ -45,6 +49,84 @@ MainWindow::~MainWindow()
 }
 
 //====== ANALISIS
+void MainWindow::compilar(){
+    compile = true;
+
+    //contador de la estructura de la tabla de simbolos
+    SimbolosCount = 3500;
+    ConstantesCount = 7000;
+    AvailCount = 5550;
+
+    cuadruplos = nullptr;
+    FinalCuadruplo = nullptr;
+    FinalElemTS = nullptr;
+    TDS = nullptr;
+    TDC = nullptr;
+    FinalElemTC = nullptr;
+    temporales = nullptr;
+    tmpfinal = nullptr;
+
+    //contador de cuadruplos
+    CuadruplosCount = 1;
+
+    //vaciar pilas
+    while(!POperadores.empty()){
+        POperadores.pop();
+    }
+
+    while(!POperandos.empty()){
+        POperandos.pop();
+    }
+
+    while(!PTipos.empty()){
+        PTipos.pop();
+    }
+
+    while(!PAvail.empty()){
+        PAvail.pop();
+    }
+
+    while(!PSaltos.empty()){
+        PSaltos.pop();
+    }
+
+    analisisSintactico();
+
+    QMessageBox msgBox;
+    msgBox.setText("compilacion terminada");
+    msgBox.exec();
+
+
+    imprimirTablas();
+
+    //pide al usuario donde se va a guardar
+    output_file = QFileDialog::getSaveFileName(this, tr("Guardar"),
+                               "/home/shikami/ouput.cdps",
+                               tr("All Files (*.cdps)"));
+
+    if(output_file!=""){
+
+        QFile file(output_file);
+
+        //abre el archivo en modo escritura
+        if(!file.open(QIODevice::WriteOnly | QIODevice::Text)){
+            QMessageBox msgBox;
+            msgBox.setText("No se pudo guardar el archivo");
+            msgBox.exec();
+        }else{
+
+
+            //TODO SAVE THE DATA
+            file.write("data saved...");
+        }
+
+        file.close();
+
+    }
+
+
+
+}
 
 void MainWindow::analisisSintactico(){
 
@@ -121,6 +203,11 @@ void MainWindow::analisisSintactico(){
                     if(ExecucionStack.top()>=2000&&ExecucionStack.top()<=2500){
                         //cout<<"ACCION ENCONTRADA: "<<ExecucionStack.top()<<" analizando con -> "<<Stoken<<endl;
                         int accion = ExecucionStack.top();
+
+                        if(compile){
+                            ejecutarAccion(accion,Stoken,l);
+                        }
+
                         ExecucionStack.pop();
                     }else{
                         cout<<"ERROR DE SINTAXIS, no coinciden los tokens"<<endl;
@@ -322,5 +409,50 @@ void limpiarTabla(QTableWidget *tb){
     }
 }
 
+void MainWindow::imprimirTablas(){
 
+    //imprimir cuadruplos
+//    cuadruplos
+
+
+    //imprimir tabla const
+    limpiarTabla(ui->tableCon);
+    if(TDC!=nullptr){
+        ConstantesRowPtr node = TDC;
+        do{
+
+            ui->tableCon->insertRow(ui->tableCon->rowCount());
+            ui->tableCon->setItem(ui->tableCon->rowCount()-1,0,new QTableWidgetItem(QString::number(node->count)));
+            ui->tableCon->setItem(ui->tableCon->rowCount()-1,1,new QTableWidgetItem(QString::number(node->type)));
+            ui->tableCon->setItem(ui->tableCon->rowCount()-1,2,new QTableWidgetItem(QString::fromStdString(node->desc)));
+//            ui->tableCon->setItem(ui->tableCon->rowCount()-1,3,new QTableWidgetItem(QString::fromStdString(recuperarValor(node->count))));
+
+            node = node->next2;
+
+        }while(node!=nullptr);
+
+        ui->tableCon->horizontalHeader()->setStretchLastSection(true);
+    }
+
+
+    //imprimir tabla var
+    limpiarTabla(ui->tableVar);
+    if(TDS!=nullptr){
+        SimbolosRowPtr node = TDS;
+        do{
+
+            ui->tableVar->insertRow(ui->tableVar->rowCount());
+            ui->tableVar->setItem(ui->tableVar->rowCount()-1,0,new QTableWidgetItem(QString::number(node->count)));
+            ui->tableVar->setItem(ui->tableVar->rowCount()-1,1,new QTableWidgetItem(QString::number(node->type)));
+//            ui->tableVar->setItem(ui->tableVar->rowCount()-1,3,new QTableWidgetItem(QString::fromStdString(recuperarValor(node->count))));
+            ui->tableVar->setItem(ui->tableVar->rowCount()-1,2,new QTableWidgetItem(QString::fromStdString(node->desc)));
+
+            node = node->next2;
+        }while(node!=nullptr);
+
+        ui->tableVar->horizontalHeader()->setStretchLastSection(true);
+    }
+
+
+}
 
