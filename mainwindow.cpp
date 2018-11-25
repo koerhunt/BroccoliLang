@@ -418,7 +418,7 @@ void MainWindow::imprimirTablas(){
         do{
 
             ui->tableCuad->insertRow(ui->tableCuad->rowCount());
-            if(!traducir){
+            if(!ui->humanmode->isChecked()){
                 ui->tableCuad->setItem(ui->tableCuad->rowCount()-1,0,new QTableWidgetItem(QString::number(node->key)));
                 ui->tableCuad->setItem(ui->tableCuad->rowCount()-1,1,new QTableWidgetItem(QString::number(node->cop)));
                 ui->tableCuad->setItem(ui->tableCuad->rowCount()-1,2,new QTableWidgetItem(QString::number(node->op1)));
@@ -482,3 +482,8 @@ void MainWindow::imprimirTablas(){
 
 }
 
+
+void MainWindow::on_humanmode_clicked()
+{
+    MainWindow::imprimirTablas();
+}

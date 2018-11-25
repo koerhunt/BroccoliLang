@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1427</width>
-    <height>565</height>
+    <height>732</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@
       <x>20</x>
       <y>40</y>
       <width>361</width>
-      <height>441</height>
+      <height>611</height>
      </rect>
     </property>
     <property name="readOnly">
@@ -61,7 +61,7 @@
       <x>390</x>
       <y>40</y>
       <width>501</width>
-      <height>131</height>
+      <height>181</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -100,7 +100,7 @@
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>340</y>
+      <y>450</y>
       <width>141</width>
       <height>23</height>
      </rect>
@@ -113,7 +113,7 @@
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>190</y>
+      <y>230</y>
       <width>161</width>
       <height>23</height>
      </rect>
@@ -126,9 +126,9 @@
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>220</y>
+      <y>270</y>
       <width>501</width>
-      <height>111</height>
+      <height>171</height>
      </rect>
     </property>
     <column>
@@ -156,9 +156,9 @@
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>370</y>
+      <y>480</y>
       <width>501</width>
-      <height>111</height>
+      <height>171</height>
      </rect>
     </property>
     <column>
@@ -228,6 +228,48 @@
     </property>
     <property name="text">
      <string>Cuadruplos</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="outEditor">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>910</x>
+      <y>520</y>
+      <width>501</width>
+      <height>131</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>910</x>
+      <y>490</y>
+      <width>70</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Salida</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="humanmode">
+    <property name="geometry">
+     <rect>
+      <x>1266</x>
+      <y>10</y>
+      <width>131</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Human mode</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>

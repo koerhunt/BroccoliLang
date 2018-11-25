@@ -25,6 +25,9 @@ public:
     void analisisSintactico();
     void compilar();
     void imprimirTablas();
+private slots:
+    void on_humanmode_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString working_file;
