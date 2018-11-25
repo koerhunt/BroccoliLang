@@ -45,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //ejecutar
     connect(ui->acrun, &QAction::triggered, this, &MainWindow::correr);
+    outputConsole = ui->outEditor;
 
 
 }

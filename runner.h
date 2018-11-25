@@ -1,6 +1,7 @@
 #include "shared.h"
 #include "traductor.h"
 
+#include <QTextBrowser>
 #include <qinputdialog.h>
 #include <qstring.h>
 
@@ -12,6 +13,8 @@
 static int cp = 1; //contador del programa
 
 static bool inited = false;
+
+QTextBrowser *outputConsole;
 
 //Devuelve el valor en string de la variable, constante o temp
 cadena_tipo recuperarValor(int addr){
@@ -58,12 +61,17 @@ cadena_tipo recuperarValor(int addr){
             case CADENA:
             {
 
+                char *c = (char*)a->apram;
+
+                cadena_tipo str = std::to_string(*c);
+                return str;
             }
         }
     }else{
         if(addr>=7000&&addr<8000){
             ConstantesRowPtr a = buscarAddrEnTDC(addr);
-            if(a->apram==nullptr){
+
+            if(a->apram==nullptr&&a->type!=CADENA){
                 return "null";
             }
 
@@ -75,7 +83,6 @@ cadena_tipo recuperarValor(int addr){
                 cadena_tipo str = std::to_string(*c);
                 return str;
             }
-            break;
             case FLOTANTE:
             {
                 float *c = (float*)a->apram;
@@ -83,7 +90,6 @@ cadena_tipo recuperarValor(int addr){
                 cadena_tipo str = std::to_string(*c);
                 return str;
             }
-            break;
             case BOOLEANO:
             {
                 bool *c = (bool*)a->apram;
@@ -91,7 +97,6 @@ cadena_tipo recuperarValor(int addr){
                 cadena_tipo str = std::to_string(*c);
                 return str;
             }
-            break;
             case CARACTER:
             {
                 char *c = (char*)a->apram;
@@ -99,23 +104,14 @@ cadena_tipo recuperarValor(int addr){
                 cadena_tipo str = std::to_string(*c);
                 return str;
             }
-            break;
             case CADENA:
             {
-                char *c = (char*)a->apram;
-                cadena_tipo str;
-                while(*c!=0x00){
-                    str.append(c);
-                    *c++;
-                }
-                return str;
+               return  a->desc;
             }
-            break;
             }
         }
     }
 }
-
 
 tipos identificaTipo(int addr){
     if(addr>=3500&&addr<5550){
@@ -396,11 +392,8 @@ void inicializarValores(){
                     }
                     case CADENA:
                     {
-                        //prasestd
-                        string *c = &node->desc;
-                        unsigned char pt = (unsigned char)*c->data();
-
-    //                    node->apram = ;
+                        unsigned char c = *node->desc.data();
+                        node->apram = &c;
                         break;
                     }
                  }
@@ -433,13 +426,13 @@ void ejecutarCuadruplo(CuadruploPtr cuadruplo){
             cp++;
         }
         break;
-        case OUTPUT:
+            case OUTPUT:
         {
             cadena_tipo cad = recuperarValor(cuadruplo->resl);
-//            outputConsole->appendPlainText(QString::fromStdString(cad));
+            outputConsole->append(QString::fromStdString(cad));
             cp++;
-            break;
         }
+        break;
         case ASIG:
         {
 
