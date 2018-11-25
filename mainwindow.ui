@@ -60,7 +60,7 @@
      <rect>
       <x>390</x>
       <y>40</y>
-      <width>501</width>
+      <width>461</width>
       <height>181</height>
      </rect>
     </property>
@@ -127,7 +127,7 @@
      <rect>
       <x>390</x>
       <y>270</y>
-      <width>501</width>
+      <width>461</width>
       <height>171</height>
      </rect>
     </property>
@@ -157,7 +157,7 @@
      <rect>
       <x>390</x>
       <y>480</y>
-      <width>501</width>
+      <width>461</width>
       <height>171</height>
      </rect>
     </property>
@@ -185,9 +185,9 @@
    <widget class="QTableWidget" name="tableCuad">
     <property name="geometry">
      <rect>
-      <x>910</x>
+      <x>860</x>
       <y>40</y>
-      <width>501</width>
+      <width>551</width>
       <height>441</height>
      </rect>
     </property>
@@ -236,9 +236,9 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>910</x>
+      <x>860</x>
       <y>520</y>
-      <width>501</width>
+      <width>421</width>
       <height>131</height>
      </rect>
     </property>
@@ -246,7 +246,7 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>910</x>
+      <x>870</x>
       <y>490</y>
       <width>70</width>
       <height>23</height>
@@ -270,6 +270,32 @@
     </property>
     <property name="checked">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>1300</x>
+      <y>560</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ejecutar</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>1300</x>
+      <y>520</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Paso a paso</string>
     </property>
    </widget>
   </widget>
@@ -307,7 +333,7 @@
     <addaction name="accomp"/>
     <addaction name="separator"/>
     <addaction name="actionCargar_a_memoria"/>
-    <addaction name="actionCargar"/>
+    <addaction name="acrun"/>
    </widget>
    <addaction name="menuArhcivo"/>
    <addaction name="menuCompilador"/>
@@ -392,7 +418,7 @@
     <string>Cargar</string>
    </property>
   </action>
-  <action name="actionCargar">
+  <action name="acrun">
    <property name="text">
     <string>Ejecutar</string>
    </property>

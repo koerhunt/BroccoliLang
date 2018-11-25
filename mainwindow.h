@@ -25,8 +25,13 @@ public:
     void analisisSintactico();
     void compilar();
     void imprimirTablas();
+    void correr();
 private slots:
     void on_humanmode_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;

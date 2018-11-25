@@ -17,6 +17,8 @@
 
 #include "traductor.h"
 
+#include "runner.h"
+
 using namespace std;
 
 //funciones
@@ -41,6 +43,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //compilar
     connect(ui->accomp, &QAction::triggered, this, &MainWindow::compilar);
 
+    //ejecutar
+    connect(ui->acrun, &QAction::triggered, this, &MainWindow::correr);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -49,6 +55,33 @@ MainWindow::~MainWindow()
 }
 
 //====== ANALISIS
+
+void MainWindow::correr(){
+
+    inited = false;
+
+    //inicializa valores
+    inicializarValores();
+
+    int slcp;
+    do{
+        slcp = ejecutarStep();
+        imprimirTablas();
+        if(slcp==-1){
+            QMessageBox msgBox;
+            msgBox.setText("ejecucion terminada");
+            msgBox.exec();
+
+            cp=1;
+            inited=false;
+
+        }else{
+            ui->tableCuad->selectRow(slcp);
+        }
+    }while(slcp!=-1);
+
+}
+
 void MainWindow::compilar(){
     compile = true;
 
@@ -129,13 +162,6 @@ void MainWindow::compilar(){
 }
 
 void MainWindow::analisisSintactico(){
-
-    //verificacion
-    if(working_file==""){
-        MainWindow::abrir();
-    }
-
-    MainWindow::guardar();
 
     //doble verify
     if(working_file==""){
@@ -451,7 +477,7 @@ void MainWindow::imprimirTablas(){
             ui->tableCon->setItem(ui->tableCon->rowCount()-1,0,new QTableWidgetItem(QString::number(node->count)));
             ui->tableCon->setItem(ui->tableCon->rowCount()-1,1,new QTableWidgetItem(QString::number(node->type)));
             ui->tableCon->setItem(ui->tableCon->rowCount()-1,2,new QTableWidgetItem(QString::fromStdString(node->desc)));
-//            ui->tableCon->setItem(ui->tableCon->rowCount()-1,3,new QTableWidgetItem(QString::fromStdString(recuperarValor(node->count))));
+            ui->tableCon->setItem(ui->tableCon->rowCount()-1,3,new QTableWidgetItem(QString::fromStdString(recuperarValor(node->count))));
 
             node = node->next2;
 
@@ -470,7 +496,7 @@ void MainWindow::imprimirTablas(){
             ui->tableVar->insertRow(ui->tableVar->rowCount());
             ui->tableVar->setItem(ui->tableVar->rowCount()-1,0,new QTableWidgetItem(QString::number(node->count)));
             ui->tableVar->setItem(ui->tableVar->rowCount()-1,1,new QTableWidgetItem(QString::number(node->type)));
-//            ui->tableVar->setItem(ui->tableVar->rowCount()-1,3,new QTableWidgetItem(QString::fromStdString(recuperarValor(node->count))));
+            ui->tableVar->setItem(ui->tableVar->rowCount()-1,3,new QTableWidgetItem(QString::fromStdString(recuperarValor(node->count))));
             ui->tableVar->setItem(ui->tableVar->rowCount()-1,2,new QTableWidgetItem(QString::fromStdString(node->desc)));
 
             node = node->next2;
@@ -486,4 +512,27 @@ void MainWindow::imprimirTablas(){
 void MainWindow::on_humanmode_clicked()
 {
     MainWindow::imprimirTablas();
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    int slcp = ejecutarStep();
+    imprimirTablas();
+    if(slcp==-1){
+        QMessageBox msgBox;
+        msgBox.setText("ejecucion terminada");
+        msgBox.exec();
+
+        cp=1;
+        inited=false;
+
+    }else{
+        ui->tableCuad->selectRow(slcp);
+    }
+
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    MainWindow::correr();
 }
