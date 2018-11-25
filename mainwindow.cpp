@@ -13,6 +13,8 @@
 #include "lexical.h"
 #include "shared_lex.h"
 
+#include "sintactical.h"
+
 using namespace std;
 
 //funciones
@@ -32,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //analisis
     connect(ui->aclexico, &QAction::triggered, this, &MainWindow::analisisLexico);
+    connect(ui->acsintx, &QAction::triggered, this, &MainWindow::analisisSintactico);
 
 
 }
@@ -42,6 +45,132 @@ MainWindow::~MainWindow()
 }
 
 //====== ANALISIS
+
+void MainWindow::analisisSintactico(){
+
+
+    //guardar cambios
+    MainWindow::guardar();
+
+    //verificacion
+    if(working_file==""){
+        return;
+    }
+
+    //cargar archivo al lexico
+    loadStdFile(working_file.toStdString());
+
+    //limpiar pila
+    while(!ExecucionStack.empty()){
+        ExecucionStack.pop();
+    }
+
+    //prepara pila de ejecucion
+    ExecucionStack.push('$'); //$ [fin de fichero]
+    ExecucionStack.push(1);   //produccion program
+
+    //reinicializar ltoken
+    Ltoken=0;
+
+    //while
+    while(Ltoken!=-1){
+
+        lex_entry *l = dameToken();
+
+        //Analizar estado de terminacion, si lo hay
+        if(Ltoken==-1){
+            if(ExecucionStack.top()=='$'){
+                ExecucionStack.pop();
+                QMessageBox msgBox;
+                msgBox.setText("Analisis completado correctamente! la sintaxis es correcta");
+                msgBox.exec();
+            }else{
+                while(!ExecucionStack.empty()){
+                    ExecucionStack.pop();
+                }
+                QMessageBox msgBox;
+                msgBox.setText("Analisis terminado incorrectamente, se llego al fin de fichero y no termino de analizar");
+                msgBox.exec();
+                break;
+            }
+            return;
+        }
+
+        //regresa elemento correspondiente a sintactico (>=1000)
+        int Stoken = relacionaAlex(Ltoken,*l);
+
+        //obtiene columna
+        int rcol = Stoken-1000;
+
+        bool found = false;
+
+        while(!found){
+
+            //imprimirStack(ExecucionStack);
+
+            if(ExecucionStack.top()>=1000){
+
+                //es elemento terminal
+                if(ExecucionStack.top()==Stoken){
+                    ExecucionStack.pop();
+                    found = true;
+                }else{
+                    //es accion (traduccion
+                    if(ExecucionStack.top()>=2000&&ExecucionStack.top()<=2500){
+                        //cout<<"ACCION ENCONTRADA: "<<ExecucionStack.top()<<" analizando con -> "<<Stoken<<endl;
+                        int accion = ExecucionStack.top();
+                        ExecucionStack.pop();
+                    }else{
+                        cout<<"ERROR DE SINTAXIS, no coinciden los tokens"<<endl;
+                        cout<<"En pila: "<<ExecucionStack.top()<<endl;
+                        cout<<"Encontrado: "<<Stoken<<endl;
+                        break;
+                    }
+                }
+
+            }else{
+                int elem = MATRIZ_PREDICTIVA[ExecucionStack.top()-1][rcol];
+
+                if(elem!=-1){
+
+                    //elimina la produccion
+                    ExecucionStack.pop();
+
+                    //insertar producciones a la pila
+                    for(int i=10; i>=0;i--){
+
+                        int elem2 = MATRIZ_DE_PRODUCCIONES[(elem-1)][i];
+
+                        //vacio
+                        if(elem2==-1){
+                            break;
+                        }else{
+                            //ignorar el relleno
+                            if(elem2!=0){
+                                ExecucionStack.push(elem2);
+                            }
+                        }
+                    }
+
+                }else{
+                    //error de sintaxis
+                    cout<<"ERR --> "<<elem<<endl;
+                    QMessageBox msgBox;
+                    msgBox.setText("Error de sintaxis");
+                    msgBox.exec();
+                    break;
+                }
+
+            }
+
+
+        }
+
+
+    }
+
+    closeFile();
+}
 
 void MainWindow::analisisLexico(){
 

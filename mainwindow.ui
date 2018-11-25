@@ -122,7 +122,7 @@
      <string>Verificaciones</string>
     </property>
     <addaction name="aclexico"/>
-    <addaction name="actionVerificar_sintaxis_2"/>
+    <addaction name="acsintx"/>
    </widget>
    <widget class="QMenu" name="menuconstruir">
     <property name="title">
@@ -201,7 +201,7 @@
     <string>Lexica</string>
    </property>
   </action>
-  <action name="actionVerificar_sintaxis_2">
+  <action name="acsintx">
    <property name="text">
     <string>Sintactica</string>
    </property>

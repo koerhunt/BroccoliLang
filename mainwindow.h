@@ -22,6 +22,7 @@ public:
     void cerrar();
     void analisisLexico();
 
+    void analisisSintactico();
 private:
     Ui::MainWindow *ui;
     QString working_file;
