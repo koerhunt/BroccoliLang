@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>921</width>
+    <height>555</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QTextBrowser" name="textEditor">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>361</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>false</bool>
+    </property>
+    <property name="tabStopWidth">
+     <number>20</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>70</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Editor</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>921</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuArhcivo">
+    <property name="title">
+     <string>Archivo</string>
+    </property>
+    <addaction name="mabrir"/>
+    <addaction name="separator"/>
+    <addaction name="mguardar"/>
+    <addaction name="mguardarcomo"/>
+    <addaction name="separator"/>
+    <addaction name="mcerrar"/>
+   </widget>
+   <widget class="QMenu" name="menuCompilador">
+    <property name="title">
+     <string>Verificaciones</string>
+    </property>
+    <addaction name="actionVerificar_sintaxis"/>
+    <addaction name="actionVerificar_sintaxis_2"/>
+   </widget>
+   <widget class="QMenu" name="menuconstruir">
+    <property name="title">
+     <string>Construir</string>
+    </property>
+    <addaction name="actionCompilar_2"/>
+    <addaction name="separator"/>
+    <addaction name="actionCargar_a_memoria"/>
+    <addaction name="actionCargar"/>
+   </widget>
+   <addaction name="menuArhcivo"/>
+   <addaction name="menuCompilador"/>
+   <addaction name="menuconstruir"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionAbrir">
+   <property name="text">
+    <string>Nuevo</string>
+   </property>
+  </action>
+  <action name="actionGuardar">
+   <property name="text">
+    <string>Abrir</string>
+   </property>
+  </action>
+  <action name="actionLexico">
+   <property name="text">
+    <string>Lexico</string>
+   </property>
+  </action>
+  <action name="actionSintaxis">
+   <property name="text">
+    <string>Sintaxis</string>
+   </property>
+  </action>
+  <action name="actionCompilar">
+   <property name="text">
+    <string>Compilar</string>
+   </property>
+  </action>
+  <action name="actionGuardar_2">
+   <property name="text">
+    <string>Guardar</string>
+   </property>
+  </action>
+  <action name="actionCerrar">
+   <property name="text">
+    <string>Cerrar</string>
+   </property>
+  </action>
+  <action name="mabrir">
+   <property name="text">
+    <string>Abrir</string>
+   </property>
+  </action>
+  <action name="mguardar">
+   <property name="text">
+    <string>Guardar</string>
+   </property>
+  </action>
+  <action name="mcerrar">
+   <property name="text">
+    <string>Cerrar</string>
+   </property>
+  </action>
+  <action name="actionVerificar_sintaxis">
+   <property name="text">
+    <string>Lexica</string>
+   </property>
+  </action>
+  <action name="actionVerificar_sintaxis_2">
+   <property name="text">
+    <string>Sintactica</string>
+   </property>
+  </action>
+  <action name="actionCompilar_2">
+   <property name="text">
+    <string>Compilar</string>
+   </property>
+  </action>
+  <action name="actionCargar_a_memoria">
+   <property name="text">
+    <string>Cargar</string>
+   </property>
+  </action>
+  <action name="actionCargar">
+   <property name="text">
+    <string>Ejecutar</string>
+   </property>
+  </action>
+  <action name="mguardarcomo">
+   <property name="text">
+    <string>Guardar Como</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
