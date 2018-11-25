@@ -1,4 +1,4 @@
-#include "shared_lex.h"
+#include "shared.h"
 #include "iostream"
 #include <fstream>
 
@@ -18,7 +18,7 @@
 
 //Vars
 std::ifstream theFile;
-static tipo_cadena lexema;
+static cadena_tipo lexema;
 static char c;
 
 //global
@@ -49,9 +49,9 @@ static int TTABLE[19][33] = {
 };
 
 //Tabla de tokens
-tipo_cadena Token(int edo)
+cadena_tipo Token(int edo)
 {
-    tipo_cadena cad = "NO ENCONTRADO";
+    cadena_tipo cad = "NO ENCONTRADO";
     switch(edo){
         case 100:{
         cad = "Palabra reservada";
@@ -190,9 +190,9 @@ tipo_cadena Token(int edo)
 }
 
 //Tabla de errores
-tipo_cadena Error(int edo)
+cadena_tipo Error(int edo)
 {
-    tipo_cadena cad = "CODIGO DE ERROR NO ENCONTRADO";
+    cadena_tipo cad = "CODIGO DE ERROR NO ENCONTRADO";
     switch(edo){
         case 500:{
         cad = "Simbolo no reconocido por el lenguaje";
@@ -342,7 +342,7 @@ void loadFile(char *filepath){
     theFile.open (filepath, std::ios::in);
 }
 
-void loadStdFile(tipo_cadena filepath){
+void loadStdFile(cadena_tipo filepath){
     theFile.open (filepath, std::ios::in);
 }
 

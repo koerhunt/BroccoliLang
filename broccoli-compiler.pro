@@ -29,8 +29,9 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     lexical.h \
-    shared_lex.h \
-    sintactical.h
+    sintactical.h \
+    traductor.h \
+    shared.h
 
 FORMS += \
         mainwindow.ui

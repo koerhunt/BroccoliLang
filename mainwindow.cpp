@@ -11,7 +11,7 @@
 #include <QTextStream>
 
 #include "lexical.h"
-#include "shared_lex.h"
+#include "shared.h"
 
 #include "sintactical.h"
 
