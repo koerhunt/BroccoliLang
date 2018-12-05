@@ -246,7 +246,7 @@ void guardarValor(QString tx, int addr){
 }
 
 //guardar temp
-void asignarTemp(int addr, unsigned char* valpt, tipos t){
+void asignarTemp(int addr, void* valpt, tipos t){
 
     TempRowPtr nodo = buscarAddrEnTmp(addr);
     if(nodo==nullptr){
@@ -441,15 +441,48 @@ void ejecutarCuadruplo(CuadruploPtr cuadruplo){
 
         if(cuadruplo->op1>=3500&&cuadruplo->op1<5550){
             SimbolosRowPtr a = buscarAddrEnTDS(cuadruplo->op1);
-            *pt2->apram = *a->apram;
+            if(pt2->type==ENTERO){
+             *(int*)pt2->apram = *(int*)a->apram;
+            }
+            if(pt2->type==FLOTANTE){
+              *(float*)pt2->apram = *(float*)a->apram;
+            }
+            if(pt2->type==CARACTER){
+                *(char*)pt2->apram = *(char*)a->apram;
+            }
+            if(pt2->type==BOOLEANO){
+                *(bool*)pt2->apram = *(bool*)a->apram;
+            }
         }else{
             if(cuadruplo->op1>=5550&&cuadruplo->op1<7000){
                 TempRowPtr a = buscarAddrEnTmp(cuadruplo->op1);
-                *pt2->apram = *a->apram;
+                if(pt2->type==ENTERO){
+                 *(int*)pt2->apram = *(int*)a->apram;
+                }
+                if(pt2->type==FLOTANTE){
+                  *(float*)pt2->apram = *(float*)a->apram;
+                }
+                if(pt2->type==CARACTER){
+                    *(char*)pt2->apram = *(char*)a->apram;
+                }
+                if(pt2->type==BOOLEANO){
+                    *(bool*)pt2->apram = *(bool*)a->apram;
+                }
             }else{
                 if(cuadruplo->op1>=7000&&cuadruplo->op1<=8000){
                     ConstantesRowPtr a = buscarAddrEnTDC(cuadruplo->op1);
-                    *pt2->apram= *a->apram;
+                    if(pt2->type==ENTERO){
+                     *(int*)pt2->apram = *(int*)a->apram;
+                    }
+                    if(pt2->type==FLOTANTE){
+                      *(float*)pt2->apram = *(float*)a->apram;
+                    }
+                    if(pt2->type==CARACTER){
+                        *(char*)pt2->apram = *(char*)a->apram;
+                    }
+                    if(pt2->type==BOOLEANO){
+                        *(bool*)pt2->apram = *(bool*)a->apram;
+                    }
                 }
             }
 
@@ -467,7 +500,7 @@ void ejecutarCuadruplo(CuadruploPtr cuadruplo){
            //prasebool
            bool *nump = (bool*)malloc(1);
            *nump=resl;
-           unsigned char *pt = (unsigned char*)nump;
+           void *pt = (void*)nump;
            asignarTemp(cuadruplo->resl,pt,BOOLEANO);
            cp++;
         }

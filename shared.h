@@ -67,7 +67,7 @@ struct simbolosRow{
     tipos type;
     int count;
     cadena_tipo desc;
-    unsigned char *apram;
+    void *apram;
     int *apnext;
     struct simbolosRow *next2;
 };
@@ -76,14 +76,14 @@ struct constantesRow{
     tipos type;
     int count;
     cadena_tipo desc;
-    unsigned char *apram;
+    void *apram;
     struct constantesRow *next2;
 };
 
 struct tempRow{
     tipos type;
     int addr;
-    unsigned char *apram;
+    void *apram;
     struct tempRow *next2;
 };
 
