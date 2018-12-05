@@ -19,6 +19,8 @@
 
 #include "runner.h"
 
+#include "loader.h"
+
 using namespace std;
 
 //funciones
@@ -45,6 +47,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //ejecutar
     connect(ui->acrun, &QAction::triggered, this, &MainWindow::correr);
+
+    //load
+    connect(ui->acload, &QAction::triggered, this, &MainWindow::load);
+
     outputConsole = ui->outEditor;
 
 
@@ -140,21 +146,7 @@ void MainWindow::compilar(){
 
     if(output_file!=""){
 
-        QFile file(output_file);
-
-        //abre el archivo en modo escritura
-        if(!file.open(QIODevice::WriteOnly | QIODevice::Text)){
-            QMessageBox msgBox;
-            msgBox.setText("No se pudo guardar el archivo");
-            msgBox.exec();
-        }else{
-
-
-            //TODO SAVE THE DATA
-            file.write("data saved...");
-        }
-
-        file.close();
+        write(output_file);
 
     }
 
@@ -536,4 +528,31 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_pushButton_clicked()
 {
     MainWindow::correr();
+}
+
+
+void MainWindow::load(){
+
+    //cara la ruta del archivo
+    QString filename = QFileDialog::getOpenFileName(this,
+                                                tr("Abrir archivo fuente"), "/home/shikami", tr("All Files (*.cdps)"));
+    //valida que se selecciona un archivo
+    if(filename!=""){
+
+        cuadruplos = nullptr;
+        FinalCuadruplo = nullptr;
+        FinalElemTS = nullptr;
+        TDS = nullptr;
+        TDC = nullptr;
+        FinalElemTC = nullptr;
+        temporales = nullptr;
+        tmpfinal = nullptr;
+
+       CargaArchivo(filename);
+
+       imprimirTablas();
+
+    }
+
+
 }

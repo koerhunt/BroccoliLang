@@ -32,7 +32,8 @@ HEADERS += \
     sintactical.h \
     traductor.h \
     shared.h \
-    runner.h
+    runner.h \
+    loader.h
 
 FORMS += \
         mainwindow.ui

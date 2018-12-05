@@ -332,7 +332,7 @@
     </property>
     <addaction name="accomp"/>
     <addaction name="separator"/>
-    <addaction name="actionCargar_a_memoria"/>
+    <addaction name="acload"/>
     <addaction name="acrun"/>
    </widget>
    <addaction name="menuArhcivo"/>
@@ -413,7 +413,7 @@
     <string>Compilar</string>
    </property>
   </action>
-  <action name="actionCargar_a_memoria">
+  <action name="acload">
    <property name="text">
     <string>Cargar</string>
    </property>

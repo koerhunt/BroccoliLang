@@ -26,6 +26,7 @@ public:
     void compilar();
     void imprimirTablas();
     void correr();
+    void load();
 private slots:
     void on_humanmode_clicked();
 
